@@ -46,8 +46,6 @@ public class Ciudad {
                 .flatMap(a -> a.vuelosQueLlegaronElDia(dia).stream())
                 .collect(Collectors.toList());
 
-        System.out.println(vuelosQueLlegaronEseDia.size());
-
         return vuelosQueLlegaronEseDia
                 .stream()
                 .mapToInt(v -> v.cantPasajeros())

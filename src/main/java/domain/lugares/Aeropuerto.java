@@ -3,7 +3,6 @@ package domain.lugares;
 import domain.viajes.Vuelo;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +45,7 @@ public class Aeropuerto {
     public Integer cantVuelosQuePartieronElDia(LocalDate dia) {
         return (int) this.vuelos
                 .stream()
-                .filter(v -> v.getFecha().isEqual(ChronoLocalDateTime.from(dia)))
+                .filter(v -> v.getFecha().toLocalDate().isEqual(dia))
                 .count();
     }
 

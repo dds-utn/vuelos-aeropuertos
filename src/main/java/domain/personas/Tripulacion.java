@@ -3,10 +3,10 @@ package domain.personas;
 import domain.viajes.Vuelo;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Tripulacion {
     private String nombre;
@@ -35,9 +35,6 @@ public class Tripulacion {
     }
 
     public void agregarEmpleados(Empleado ... empleados) {
-        for(Empleado empleado : empleados){
-            empleado.agregarTripulacion(this);
-        }
         Collections.addAll(this.empleados, empleados);
     }
 
@@ -45,20 +42,24 @@ public class Tripulacion {
         Collections.addAll(this.vuelos, vuelos);
     }
 
-    public Integer cantVuelosEntre(LocalDate fechaInicial, LocalDate fechaFinal) {
-        return (int) this.vuelos
+    private List<Vuelo> vuelosEntre(LocalDate fechaInicial, LocalDate fechaFinal) {
+        return this.vuelos
                 .stream()
                 .filter(
                         v ->
                                 (
-                                        v.getFecha().isAfter(ChronoLocalDateTime.from(fechaInicial))
-                                                || v.getFecha().isEqual(ChronoLocalDateTime.from(fechaInicial))
+                                        v.getFecha().toLocalDate().isAfter(fechaInicial)
+                                                || v.getFecha().toLocalDate().isEqual(fechaInicial)
                                 )
                                         && (
-                                                v.getFecha().isBefore(ChronoLocalDateTime.from(fechaFinal))
-                                                        || v.getFecha().isEqual(ChronoLocalDateTime.from(fechaFinal))
+                                        v.getFecha().toLocalDate().isBefore(fechaFinal)
+                                                || v.getFecha().toLocalDate().isEqual(fechaFinal)
                                 )
                 )
-                .count();
+                .collect(Collectors.toList());
+    }
+
+    public Integer cantVuelosEnMesesEntre(LocalDate fechaInicial, LocalDate fechaFinal) {
+        return this.vuelosEntre(fechaInicial, fechaFinal).size();
     }
 }

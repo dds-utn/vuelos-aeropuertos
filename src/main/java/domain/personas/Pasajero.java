@@ -5,6 +5,7 @@ import domain.lugares.Pais;
 import domain.viajes.Vuelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Pasajero extends Persona {
@@ -36,6 +37,10 @@ public class Pasajero extends Persona {
 
     public List<Vuelo> getVuelos() {
         return vuelos;
+    }
+
+    public void agregarVuelos(Vuelo ... vuelos) {
+        Collections.addAll(this.vuelos, vuelos);
     }
 
     public Integer cantVuelosTotales() {
