@@ -12,7 +12,9 @@ public class Pasajero extends Persona {
     private Integer nroDePasaporte;
     private Pais nacionalidad;
 
-    public Pasajero() {
+    public Pasajero(String nombre, String apellido) {
+        super.setNombre(nombre);
+        super.setApellido(apellido);
         this.vuelos = new ArrayList<>();
     }
 

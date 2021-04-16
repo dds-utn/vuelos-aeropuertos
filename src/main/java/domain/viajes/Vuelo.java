@@ -38,6 +38,7 @@ public class Vuelo {
 
     public void setDestino(Aeropuerto destino) {
         this.destino = destino;
+        destino.agregarVuelos(this);
     }
 
     public LocalDateTime getFecha() {
@@ -90,10 +91,10 @@ public class Vuelo {
     }
 
     public LocalDateTime fechaDeLlegadaAproximada() {
-        return this.fecha.plusHours(this.duracionEstimadaEnMins.longValue());
+        return this.fecha.plusMinutes(this.duracionEstimadaEnMins.longValue());
     }
 
-    public Double capacidadOcupadaPorPasajeros() {
+    public Double capacidadRealOcupadaPorPasajeros() {
         return (this.cantPasajeros() * 100.00) / this.avion.getCantAsientos();
     }
 

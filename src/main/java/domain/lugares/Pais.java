@@ -1,6 +1,7 @@
 package domain.lugares;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Pais {
@@ -8,8 +9,10 @@ public class Pais {
     private Continente continente;
     private List<Ciudad> ciudades;
 
-    public Pais() {
+    public Pais(String nombre, Continente continente) {
         this.ciudades = new ArrayList<>();
+        this.nombre = nombre;
+        this.continente = continente;
     }
 
     public String getNombre() {
@@ -28,9 +31,7 @@ public class Pais {
         this.continente = continente;
     }
 
-    public void agregarCiudad(String nombre) {
-        Ciudad unaCiudad = new Ciudad(this);
-        unaCiudad.setNombre(nombre);
-        this.ciudades.add(unaCiudad);
+    public void agregarCiudades(Ciudad ... ciudades) {
+        Collections.addAll(this.ciudades, ciudades);
     }
 }

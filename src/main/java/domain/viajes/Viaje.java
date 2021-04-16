@@ -2,8 +2,8 @@ package domain.viajes;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Viaje {
     private List<Vuelo> vuelos;
@@ -40,6 +40,14 @@ public class Viaje {
         return escalas;
     }
 
+    public void agregarVuelos(Vuelo ... vuelos) {
+        Collections.addAll(this.vuelos, vuelos);
+    }
+
+    public void agregarEscalas(Escala ... escalas) {
+        Collections.addAll(this.escalas, escalas);
+    }
+
     public Integer cantPasajerosTotales() {
         /*this.vuelos
                 .stream()
@@ -49,15 +57,15 @@ public class Viaje {
         return this.vuelos.stream().mapToInt(Vuelo::cantPasajeros).sum();
     }
 
-    private Double duracionTotalDeVuelos() {
+    private Double duracionTotalDeVuelosEnMins() {
         return this.vuelos.stream().mapToDouble(v -> v.getDuracionEstimadaEnMins()).sum();
     }
 
-    private Double duracionTotalDeEscalas() {
+    private Double duracionTotalDeEscalasEnMins() {
         return this.escalas.stream().mapToDouble(Escala::getDuracionEnMins).sum();
     }
 
-    public Double duracionTotal() {
-        return this.duracionTotalDeEscalas() + this.duracionTotalDeVuelos();
+    public Double duracionTotalEnMins() {
+        return this.duracionTotalDeEscalasEnMins() + this.duracionTotalDeVuelosEnMins();
     }
 }

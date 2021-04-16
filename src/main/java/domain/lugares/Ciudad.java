@@ -4,6 +4,7 @@ import domain.viajes.Vuelo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,9 +13,11 @@ public class Ciudad {
     private Pais pais;
     private List<Aeropuerto> aeropuertos;
 
-    public Ciudad(Pais pais) {
+    public Ciudad(String nombre, Pais pais) {
         this.aeropuertos = new ArrayList<>();
         this.pais = pais;
+        this.nombre = nombre;
+        pais.agregarCiudades(this);
     }
 
     public String getNombre() {
@@ -29,6 +32,10 @@ public class Ciudad {
         return pais;
     }
 
+    public void agregarAeropuertos(Aeropuerto ... aeropuertos) {
+        Collections.addAll(this.aeropuertos, aeropuertos);
+    }
+
     public Integer cantDeAeropuertos() {
         return this.aeropuertos.size();
     }
@@ -38,6 +45,8 @@ public class Ciudad {
                 .stream()
                 .flatMap(a -> a.vuelosQueLlegaronElDia(dia).stream())
                 .collect(Collectors.toList());
+
+        System.out.println(vuelosQueLlegaronEseDia.size());
 
         return vuelosQueLlegaronEseDia
                 .stream()
