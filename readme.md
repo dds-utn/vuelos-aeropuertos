@@ -1,3 +1,3 @@
-![Enunciado](Enunciado.png)
+![Enunciado](Enunciado.PNG)
 
-![Diagrama de clases](diagrama_de_clases_propuesto.png)
+![Diagrama de clases](diagrama_de_clases_propuesto.PNG)
